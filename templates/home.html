@@ -8,27 +8,59 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
-<body>
-    <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4" style="color: #20B2AA;">Pokémon</span> <!-- Alterando a cor do texto para #20B2AA -->
-        </a>
+<body style="background-color: #FAF5F3">
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-4" style="color: #20B2AA;">Pokémon</span> <!-- Alterando a cor do texto para #20B2AA -->
+      </a>
 
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link active" style="background-color: #20B2AA;" aria-current="page">Home</a></li> <!-- Alterando a cor do link ativo para #20B2AA -->
-            <li class="nav-item"><a href="http://127.0.0.1:5000/pokedex" class="nav-link" style="color: black;">Pokédex</a></li> <!-- Alterando a cor do link para #20B2AA -->
-        </ul>
-    </header>
-      </div>
+      <ul class="nav nav-pills">
+          <li class="nav-item"><a href="http://127.0.0.1:5000/" class="nav-link active" aria-current="page" style="background-color: #20B2AA;">Home</a></li> <!-- Alterando a cor do link ativo para #20B2AA -->
+          <li class="nav-item"><a href="http://127.0.0.1:5000/pokedex" class="nav-link " style="color: black;" >Pokédex</a></li> <!-- Alterando a cor do link para #20B2AA -->
+      </ul>
+  </header>
+    </div>
+    <div style="width:40%; margin-left: 40%; margin-bottom: 1%;">
+      <form action="buscar" method="POST" class="form-inline">
+        <input class="form-control-lg" placeholder="buscar pokémon" name="nome" type="text" >
+        <button type="submit" class="btn btn-primary btn-lg" name="buscar" style="margin-bottom: 1.5%; background-color:#20B2AA; --bs-btn-border-color: #20B2AA;">Buscar</button>
     </div>
 
-    <form action="buscar" method="POST">
-      <input placeholder="buscar pokémon" name="nome" type="text">
-      <button type="submit" name="buscar">Buscar</button>
-    </form>
-    <h2>{{nome}}</h2>
-    <img src="{{foto}}">
+
+    <div class="container">
+      <div class="row">
+            <div id="center" class="col-md-6" >
+              <div class="card mb-1" id="card"  style = "width: 40rem; height: 45rem;">
+                
+                <img src="{{foto}}">
+              </div>
+            </div>
+
+            <div id="center" class="col-md-6">
+              <div class="card mb-1" id="card"  style = "width: 40rem; height: 45rem; font-size: 30px;">
+
+ 
+                <a style="margin-left: 10%; margin-top: 10%;"><strong>Nome:</strong> {{nome}}</a>
+                <a style="margin-left: 10%;"><strong>ID:</strong> {{id}}</a>
+                <a style="margin-left: 10%;"><strong>Peso:</strong> {{peso/10}} Kg</a>
+                <a style="margin-left: 10%;"><strong>Altura:</strong> {{altura*10}} cm</a>
+                <a style="margin-left: 10%;"><strong>Tipos:</strong> {{tipos[0]}}{{tipos[1]}}</a>
+
+                <div class="float-right" style="margin-left: 20%; margin-right: 20%; margin-top: 7%;">
+                  
+                  <img src = "{{foto}}"  style="width:10rem" class="float-left">
+                  <img src = "{{foto_costas}}" style="width:10rem" class="float-left">
+                  
+                  <img src = "{{foto_shiny}}"  style="width:10rem" class="float-left">
+                  <img src = "{{foto_costas_shiny}}" style="width:10rem" class="float-left">
+
+                </div>
+              </div>
+            </div>
+
+      </div>
+    </div>
 </body>
 </html>

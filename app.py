@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, request, jsonify
 import requests
 
@@ -18,15 +19,34 @@ def fetch_pokemon_data(id):
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    silhouette = "https://i.pinimg.com/originals/3d/f6/ef/3df6eff48175fa05ec90a00415fcfe25.png"
+    return render_template('home.html', nome = "??", foto = silhouette, peso = 0, altura = 0, tipos = "??", id = 0, foto_costas = silhouette, foto_shiny = silhouette, foto_costas_shiny = silhouette)
 
-@app.route('/buscar', methods=["GET", "POST"])
+@app.route('/buscar', methods = ["GET", "POST"])
 def buscar():
-    pokemon_name = request.form["nome"].lower()
-    pokemon_data = fetch_pokemon_data(pokemon_name)
-    if pokemon_data:
-        return render_template('home.html', nome=pokemon_data['name'], foto=pokemon_data['sprites'])
-    return "Not found"
+    pokemon = request.form["nome"].lower()
+    try:
+        res = json.loads(requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon}").text)
+
+        print(res["forms"][0]["name"].title())
+
+        foto = res["sprites"]["front_default"]
+        foto_costas = res["sprites"]["back_default"]
+        foto_shiny = res["sprites"]["front_shiny"]
+        foto_costas_shiny = res["sprites"]["back_shiny"]
+        nome = res["forms"][0]["name"].title()
+        id = res["id"]
+        peso = res["weight"]
+        altura = res["height"]
+        tipos = [res["types"][0]["type"]["name"].title()]
+        if len(res["types"])> 1:
+            tipos.append(" e " + res["types"][1]["type"]["name"].title())
+          
+    except:
+        silhouette = "https://i.pinimg.com/originals/3d/f6/ef/3df6eff48175fa05ec90a00415fcfe25.png"
+        return render_template('home.html', nome = "??", foto = silhouette, peso = 0, altura = 0, tipos = "??", id = 0, foto_costas = silhouette, foto_shiny = silhouette, foto_costas_shiny = silhouette)
+    
+    return render_template('home.html', nome = nome, foto = foto, peso = peso, altura = altura, tipos = tipos, id = id, foto_costas = foto_costas, foto_shiny = foto_shiny, foto_costas_shiny = foto_costas_shiny)
 
 @app.route('/pokedex')
 def pokedex():
