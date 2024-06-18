@@ -11,11 +11,51 @@
     text-align: center;
 }
 
+.active{
+    background-color:#20B2AA;
+}
+
 #card{
     border-width: 0;
     border-radius: 25px;
-    box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, 0.1);;
+    box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
+#container-informacoes {
+    display: none; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.5); 
+}
 
+.informacoes {
+    background-color: white; 
+    width: 40%;
+    padding: 30px;
+    padding-top: 20px;
+    border-radius: 16px;
+}
+
+.botao {
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+button {
+    border: 0;
+    background-color: transparent;
+}
+
+#informacoes-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
