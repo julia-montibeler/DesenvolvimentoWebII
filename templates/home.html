@@ -19,48 +19,54 @@
       <ul class="nav nav-pills">
           <li class="nav-item"><a href="http://127.0.0.1:5000/" class="nav-link active" aria-current="page" style="background-color: #20B2AA;">Home</a></li> <!-- Alterando a cor do link ativo para #20B2AA -->
           <li class="nav-item"><a href="http://127.0.0.1:5000/pokedex" class="nav-link " style="color: black;" >Pokédex</a></li> <!-- Alterando a cor do link para #20B2AA -->
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <b><span class="nav-link" style="color: #20B2AA;">{{ current_user.username }}</span></b>
+          </li>
+          <li class="nav-item">
+            <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+                <button type="submit" class="btn-link nav-link" style="color: black;">Logout</button>
+            </form>
+          </li>
+          {% else %}
+          <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link" style="color: black;">Login</a></li>
+          <li class="nav-item"><a href="{{ url_for('register') }}" class="nav-link" style="color: black;">Register</a></li>
+          {% endif %}
       </ul>
-  </header>
-    </div>
-    <div style="width:40%; margin-left: 40%; margin-bottom: 1%;">
-      <form action="buscar" method="POST" class="form-inline">
-        <input class="form-control-lg" placeholder="buscar pokémon" name="nome" type="text" >
-        <button type="submit" class="btn btn-primary btn-lg" name="buscar" style="margin-bottom: 1.5%; background-color:#20B2AA; --bs-btn-border-color: #20B2AA;">Buscar</button>
-    </div>
+    </header>
+  </div>
+  <div style="width:40%; margin-left: 40%; margin-bottom: 1%;">
+    <form action="buscar" method="POST" class="form-inline">
+      <input class="form-control-lg" placeholder="buscar pokémon" name="nome" type="text">
+      <button type="submit" class="btn btn-primary btn-lg" name="buscar" style="margin-bottom: 1.5%; background-color:#20B2AA; --bs-btn-border-color: #20B2AA;">Buscar</button>
+    </form>
+  </div>
 
+  <div class="container">
+    <div class="row">
+      <div id="center" class="col-md-6">
+        <div class="card mb-1" id="card" style="width: 40rem; height: 45rem;">
+          <img src="{{foto}}">
+        </div>
+      </div>
 
-    <div class="container">
-      <div class="row">
-            <div id="center" class="col-md-6" >
-              <div class="card mb-1" id="card"  style = "width: 40rem; height: 45rem;">
-                
-                <img src="{{foto}}">
-              </div>
-            </div>
+      <div id="center" class="col-md-6">
+        <div class="card mb-1" id="card" style="width: 40rem; height: 45rem; font-size: 30px;">
+          <a style="margin-left: 10%; margin-top: 10%;"><strong>Nome:</strong> {{nome}}</a>
+          <a style="margin-left: 10%;"><strong>ID:</strong> {{id}}</a>
+          <a style="margin-left: 10%;"><strong>Peso:</strong> {{peso/10}} Kg</a>
+          <a style="margin-left: 10%;"><strong>Altura:</strong> {{altura*10}} cm</a>
+          <a style="margin-left: 10%;"><strong>Tipos:</strong> {{tipos[0]}}{{tipos[1]}}</a>
 
-            <div id="center" class="col-md-6">
-              <div class="card mb-1" id="card"  style = "width: 40rem; height: 45rem; font-size: 30px;">
-
- 
-                <a style="margin-left: 10%; margin-top: 10%;"><strong>Nome:</strong> {{nome}}</a>
-                <a style="margin-left: 10%;"><strong>ID:</strong> {{id}}</a>
-                <a style="margin-left: 10%;"><strong>Peso:</strong> {{peso/10}} Kg</a>
-                <a style="margin-left: 10%;"><strong>Altura:</strong> {{altura*10}} cm</a>
-                <a style="margin-left: 10%;"><strong>Tipos:</strong> {{tipos[0]}}{{tipos[1]}}</a>
-
-                <div class="float-right" style="margin-left: 20%; margin-right: 20%; margin-top: 7%;">
-                  
-                  <img src = "{{foto}}"  style="width:10rem" class="float-left">
-                  <img src = "{{foto_costas}}" style="width:10rem" class="float-left">
-                  
-                  <img src = "{{foto_shiny}}"  style="width:10rem" class="float-left">
-                  <img src = "{{foto_costas_shiny}}" style="width:10rem" class="float-left">
-
-                </div>
-              </div>
-            </div>
-
+          <div class="float-right" style="margin-left: 20%; margin-right: 20%; margin-top: 7%;">
+            <img src="{{foto}}" style="width:10rem" class="float-left">
+            <img src="{{foto_costas}}" style="width:10rem" class="float-left">
+            <img src="{{foto_shiny}}" style="width:10rem" class="float-left">
+            <img src="{{foto_costas_shiny}}" style="width:10rem" class="float-left">
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 </body>
 </html>
